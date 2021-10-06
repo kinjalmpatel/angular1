@@ -1,0 +1,82 @@
+<div class="col-md-6 offset-md-3">
+    <h3>Create Employee</h3>
+  
+    <!-- <form (ngSubmit)="onsubmit()"> -->
+  
+      <div class="form-group">
+        <label>First Name</label>
+        <input type="text" class="form-control" id="firstName" [(ngModel)]="employee.firstName" name="firstName">
+      </div>
+  
+      <div class="form-group">
+        <label>Last Name</label>
+        <input type="text" class="form-control" id="lastName" [(ngModel)]="employee.lastName" name="lastName">
+      </div>
+      <div class="form-group">
+        <label>Email Id</label>
+        <input type="text" class="form-control" id="emailId" [(ngModel)]="employee.emailId" name="emailId">
+      </div>
+  
+      <table id="emptbl">
+        <tr>
+          <th>Edit/save</th>
+          <th>delete</th>
+          <th>Company Name</th>
+          <th>Experience In Years</th>
+          <th>Position</th>
+  
+          
+        </tr>
+  
+        <!-- <tr>
+          
+          <td>
+            <input [(ngModel)]="experience.company_name" name="company_name" class="form-control" type="text" />
+          </td>
+          <td>
+            <input [(ngModel)]="experience.experience_in_years" name="experience_in_years" class="form-control" type="text" />
+          </td>
+          <td>
+            <input [(ngModel)]="experience.position" name="position" class="form-control" type="text" />
+          </td>
+        </tr>
+        <tr>
+          <td (click)="addRow(experience)">
+            <i class="fa fa-plus fa-2x">Add</i>
+          </td>
+        </tr> -->
+        <ng-container >
+          <tr *ngFor="let exp of employeeExp; let i=index;">
+            {{exp.company_name}}
+            <td (click)="addRow(exp)" *ngIf="!exp.isEdit">
+              <i class="fa fa-plus fa-2x">Add</i>
+            </td>
+            <td *ngIf="!exp.isEdit">
+
+            </td>
+            <td (click)="editRow(exp)" *ngIf="exp.isEdit">
+              <i class="fa fa-plus fa-2x">Edit</i>
+            </td>
+            <td (click)="deleteRow(i)" *ngIf="exp.isEdit">
+              <i class="fa fa-trash fa-2x">Delete</i>
+            </td>
+            <td>
+              {{exp.company_name}}
+              <input [(ngModel)]="exp.company_name" id="company_name"   name="company_name" class="form-control" type="text" />
+            </td>
+            <td>
+              {{exp.experienceinyears}}
+              <input [(ngModel)]="exp.experienceinyears" id="experienceinyears" [value]="exp.experienceinyears" name="experienceinyears" class="form-control" type="text" />
+            </td>
+            <td>
+              {{exp.position}}
+              <input [(ngModel)]="exp.position" name="position" id="position" [value]="exp.position" class="form-control" type="text" />
+            </td>
+          </tr>
+         
+   
+        </ng-container>
+      </table>
+  <button class="btn btn-success" (click)="onSubmit()" type="submit">Submit</button>
+    <!-- </form> -->
+  </div>
