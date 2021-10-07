@@ -24,27 +24,44 @@ export class UpdateEmployeeComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];//console.log(this.id);
     this.ab = this.route.snapshot.params['eid'];
-    
-    this.employeeService.getEmployeeById(this.id).subscribe(data => {
-     this.employee = data;
-     console.log(this.employee);
-    }, error => console.log(error));  
-    this.employeeService.getExperienceListById(this.eid).subscribe(data1 => {
-  
-    }, error => console.log(error));
-
+    const empexp = new Experience();
+    this.employeeExp.push(empexp);
+   this.employeeService.getEmployeeById(this.id).subscribe(data => {
+    this.employee = data;
+    console.log(this.employee);
+   }, error => console.log(error));  
    // console.log(this.employeeExp);
   }
   addRow(exp: Experience) {
-    //this.employee1 = { company_name: "", experience_in_years: "", position: "" };
-    //exp.isEdit = true;
-    // const empexp = new Experience();
-    //this.employeeExp.push(empexp);
+    exp.isEdit = true;
+    const empexp = new Experience();
+    this.employeeExp.push(empexp);
+    // this.toastr.success('New row added successfully', 'New Row');
+
     //console.log(this.employeeExp);
-    return true;
+   // return true;
   }
-
-
+  saveEmployee() {
+    const blanckemp = this.employeeExp.find(x=>!x.isEdit);
+  if(blanckemp){
+    this.employeeExp.splice(this.employeeExp.length-1,1);
+  }
+      this.employee.experience = this.employeeExp;
+      this.employeeService.createEmployee(this.employee).subscribe(data => {
+        console.log(data);
+         this.saveExprience();
+     //   this.gotoEmployeeList();
+      },
+        error => console.log(error));
+    }
+    saveExprience() {
+    
+      this.employeeService.createExperience(this.employeeExp).subscribe(data => {
+       console.log(data);
+      // this.gotoEmployeeList();
+      },
+        error => console.log(error));
+    } 
   deleteRow(index: number) {
     if (this.employeeExp.length == 1) {
       //this.toastr.error("Can't delete the row when there is only one row", 'Warning');
@@ -66,11 +83,18 @@ export class UpdateEmployeeComponent implements OnInit {
     const empexp = new Experience();
     this.employeeExp.push(empexp);
     // console.log(this.employeeExp);
-    this.updateEmployee();
+    this.employeeService.updateEmployee(this.id,this.employee).subscribe(data=>{
+    this.goToEmployeeList();
+    },
+ error => console.log(error));
   }
+   
+  
 
   goToEmployeeList() {
     this.router.navigate(['/employees']);
   }
 
 }
+
+

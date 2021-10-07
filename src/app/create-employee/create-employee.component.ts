@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EmailValidator, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Employee, Experience } from '../employee';
 import { EmployeeService } from '../employee.service';
@@ -11,7 +12,10 @@ import { EmployeeService } from '../employee.service';
   styleUrls: ['./create-employee.component.css']
 })
 export class CreateEmployeeComponent implements OnInit {
+  [x: string]: any;
   //constructor(private toastr: ToastrService) { }
+  //registerForm: FormGroup;
+  //submitted = false;
 
   employee: Employee = new Employee();
   employeeExp: Array<Experience> = new Array<Experience>();
@@ -21,6 +25,7 @@ export class CreateEmployeeComponent implements OnInit {
   ngOnInit(): void {
     const empexp = new Experience();
     this.employeeExp.push(empexp);
+  
   }
   addRow(exp:Experience) {
     // this.employee11 = { company_name: "", experience_in_years: "", position: "" };
@@ -83,4 +88,12 @@ if(blanckemp){
 
 
 
+
+function validateEmail(email: any) {
+  throw new Error('Function not implemented.');
+}
+
+function email(email: any) {
+  throw new Error('Function not implemented.');
+}
 

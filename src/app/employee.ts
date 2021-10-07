@@ -9,7 +9,7 @@ export class Employee {
 export class Experience {
 
     eid:number;
-    company_name:string;
+    companyname:string;
     experienceinyears:number | undefined
     position:string | undefined;
     exp_id:number ;

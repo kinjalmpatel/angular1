@@ -8,7 +8,7 @@ import { Employee, Experience } from './employee';
 })
 export class EmployeeService {
  private baseUrl="http://localhost:8080/api/v1/employees";
-  updateEmployee: any;
+ // updateEmployee: any;
   constructor(private httpClient:HttpClient) { }
   getEmployeesList():Observable<Employee[]>{
 return this.httpClient.get<Employee[]>(`${this.baseUrl}`);
@@ -29,6 +29,13 @@ getEmployeeById(id:number):Observable<Employee>{
 getExperienceListById(eid:number):Observable<Experience[]>{
   return this.httpClient.get<Experience[]>(`${this.baseUrl}`);
 }
+updateEmployee(id:number,employee:Employee):Observable<object>{
+  return this.httpClient.put(`${this.baseUrl}/${id}`,employee);
+}
+deleteEmployee(id:number):Observable<object>{
+  return this.httpClient.delete(`${this.baseUrl}/${id}`);
+}
+
 }
 
   
