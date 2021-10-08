@@ -4,7 +4,8 @@ import{HttpClientModule} from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
-//import { ToastrModule } from 'ngx-toastr';
+//import {FormsModule} from ‘@angular/forms’
+
 
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 import { CreateEmployeeComponent } from './create-employee/create-employee.component';
@@ -18,13 +19,14 @@ import { EmployeeDetailsComponent } from './employee-details/employee-details.co
     CreateEmployeeComponent,
     UpdateEmployeeComponent,
     EmployeeDetailsComponent
-   // ReactiveFormsModule
+   
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
-    FormsModule,   // ToastrModule.forRoot()
+    HttpClientModule, ReactiveFormsModule,
+    FormsModule  // ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
