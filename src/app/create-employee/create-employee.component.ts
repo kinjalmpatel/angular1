@@ -24,7 +24,7 @@ export class CreateEmployeeComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.pattern(/^.+\..+$/)]]
     });
   }
   addRow(exp: Experience) {

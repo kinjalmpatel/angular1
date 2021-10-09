@@ -1,22 +1,37 @@
 <div class="col-md-6 offset-md-3">
   <h3>Update Employee</h3>
-
-<!-- <form (ngSubmit)="onSubmit()">  -->
+  <form [formGroup]="registerForm">
 
     <div class="form-group">
       <label>First Name</label>
-      <input type="text" class="form-control" id="firstName" [(ngModel)]="employee.firstName" name="firstName">
+      <input type="text" class="form-control"  formControlName="firstName" id="firstName"   [(ngModel)]="employee.firstName" 
+      name="firstName" 
+      [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"/>
+        <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+          <div *ngIf="f.firstName.errors.required">First Name is required</div>
+      </div>
     </div>
 
     <div class="form-group">
       <label>Last Name</label>
-      <input type="text" class="form-control" id="lastName" [(ngModel)]="employee.lastName" name="lastName">
+      <input type="text" class="form-control" formControlName="lastName" id="lastName"  [(ngModel)]="employee.lastName"
+        name="lastName"  
+        [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+        <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+          <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+      </div>
     </div>
     <div class="form-group">
       <label>Email Id</label>
-      <input type="text" class="form-control" id="emailId" [(ngModel)]="employee.emailId" name="emailId">
+      <input type="email" class="form-control" id="emailId" formControlName="email" [(ngModel)]="employee.emailId"
+        name="emailId" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">     
+        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors.required">Email is required</div>
+            <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+        </div>
     </div>
-
+  
+</form>
     <table id="emptbl">
       <tr>
         <th>Action</th>&nbsp;&nbsp;
@@ -28,25 +43,8 @@
         
       </tr>
 
-      <!-- <tr>
-        
-        <td>
-          <input [(ngModel)]="experience.company_name" name="company_name" class="form-control" type="text" />
-        </td>
-        <td>
-          <input [(ngModel)]="experience.experience_in_years" name="experience_in_years" class="form-control" type="text" />
-        </td>
-        <td>
-          <input [(ngModel)]="experience.position" name="position" class="form-control" type="text" />
-        </td>
-      </tr>
-      <tr>
-        <td (click)="addRow(experience)">
-          <i class="fa fa-plus fa-2x">Add</i>
-        </td>
-      </tr> -->
-      <ng-container >
-        <tr *ngFor="let exp of employee.experience; let i=index;">
+      <ng-container *ngFor="let exp of employee.experience; let i=index;">
+        <tr >
           
           <td (click)="addRow(exp)" *ngIf="!exp.isEdit">
             <i class="fa fa-plus fa-2x">Add</i>
